@@ -25,4 +25,11 @@ public class ScoreCard {
     String getBCorner() {
         return blueCorner;
     }
+
+    @Override
+    public String toString() {
+        return "\t" + color + "\n"
+                + getRCorner() + "\t"
+                + getBCorner();
+    }
 }
