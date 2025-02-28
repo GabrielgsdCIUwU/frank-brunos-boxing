@@ -28,7 +28,7 @@ public class ScoreCard {
 
     @Override
     public String toString() {
-        return "\t" + color + "\n"
+        return "\n\t\t" + color + "\n\t"
                 + getRCorner() + "\t"
                 + getBCorner();
     }
