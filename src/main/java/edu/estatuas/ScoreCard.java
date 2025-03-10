@@ -37,7 +37,7 @@ public class ScoreCard {
 
     private String getEachScoreRound() {
         if (getJudgeScoreCard() == null) {return "";}
-        
+
         int scoreTotalBoxerRedCorner = 0;
         int scoreTotalBoxerBlueCorner = 0;
         
@@ -52,6 +52,25 @@ public class ScoreCard {
             finalMessage.append(scoreBoxerRound[0] + "\t " + scoreTotalBoxerRedCorner + "\t " + currentRound + "\t " + scoreTotalBoxerBlueCorner + "\t " + scoreBoxerRound[1] + "\n");
         }
         return finalMessage.toString();
+    }
+
+    public int getRedBoxerFinalScore() {
+        return getFinalScoreBoxer(0);
+    }
+
+    public int getBlueBoxerFinalScore() {
+        return getFinalScoreBoxer(1);
+    }
+
+    private int getFinalScoreBoxer(int corner) {
+        
+        int finalScoreBoxer = 0;
+        for (int i = 0; i < getJudgeScoreCard().length; i++) {
+            String[] scoreBoxerRound = splitScoreCorner(getJudgeScoreCard()[i]);
+
+            finalScoreBoxer += Integer.parseInt(scoreBoxerRound[corner]);
+        }
+        return finalScoreBoxer;
     }
 
     private String[] splitScoreCorner(String scoreRound) {
