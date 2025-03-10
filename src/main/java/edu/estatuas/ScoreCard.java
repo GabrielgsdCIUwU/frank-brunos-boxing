@@ -1,11 +1,15 @@
 package edu.estatuas;
 
+import edu.estatuas.round.Round;
+import edu.estatuas.round.RoundFactory;
+
 public class ScoreCard {
 
     private String color;
     private String redCorner = "";
     private String blueCorner = "";
     private String[] judgeScoreCard;
+    private Round[] rounds;
 
     ScoreCard (String color) {
         this.color = color;
@@ -29,27 +33,36 @@ public class ScoreCard {
 
     public void loadJudgeScoreCard(String[] judgeScoreCard) {
         this.judgeScoreCard = judgeScoreCard;
+        rounds = new Round[judgeScoreCard.length];
+        for (int i = 0; i < rounds.length; i++) {
+            rounds[i] = RoundFactory.getRound(judgeScoreCard[i]);
+        }
     }
 
     private String[] getJudgeScoreCard() {
         return judgeScoreCard;
     }
 
-    private String getEachScoreRound() {
-        if (getJudgeScoreCard() == null) {return "";}
+    private Round[] getRounds() {
+        return rounds;
+    }
 
-        int scoreTotalBoxerRedCorner = 0;
-        int scoreTotalBoxerBlueCorner = 0;
+    private String getEachScoreRound() {
+        if (getRounds() == null) {return "";}
+
+        byte scoreTotalBoxerRedCorner = 0;
+        byte scoreTotalBoxerBlueCorner = 0;
         
         StringBuilder finalMessage = new StringBuilder();
-        for (int i = 0; i < getJudgeScoreCard().length; i++) {
-            String[] scoreBoxerRound = splitScoreCorner(getJudgeScoreCard()[i]);
+        for (int i = 0; i < rounds.length; i++) {
+            byte scoreRedBoxer = getRounds()[i].redBoxerScore();
+            byte scoreBlueBoxer = getRounds()[i].blueBoxerScore();
 
-            scoreTotalBoxerRedCorner += Integer.parseInt(scoreBoxerRound[0]);
-            scoreTotalBoxerBlueCorner += Integer.parseInt(scoreBoxerRound[1]);
+            scoreTotalBoxerRedCorner += scoreRedBoxer;
+            scoreTotalBoxerBlueCorner += scoreBlueBoxer;
 
             int currentRound = i+1;
-            finalMessage.append(scoreBoxerRound[0] + "\t " + scoreTotalBoxerRedCorner + "\t " + currentRound + "\t " + scoreTotalBoxerBlueCorner + "\t " + scoreBoxerRound[1] + "\n");
+            finalMessage.append(scoreRedBoxer + "\t " + scoreTotalBoxerRedCorner + "\t " + currentRound + "\t " + scoreTotalBoxerBlueCorner + "\t " + scoreBlueBoxer + "\n");
         }
         return finalMessage.toString();
     }
