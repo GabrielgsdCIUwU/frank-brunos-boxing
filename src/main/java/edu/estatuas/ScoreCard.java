@@ -2,7 +2,7 @@ package edu.estatuas;
 
 public class ScoreCard {
 
-    private static String color;
+    private String color;
     private String redCorner = "";
     private String blueCorner = "";
 
