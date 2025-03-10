@@ -38,11 +38,18 @@ public class ScoreCard {
     private String getEachScoreRound() {
         if (getJudgeScoreCard() == null) {return "";}
         
+        int scoreTotalBoxerRedCorner = 0;
+        int scoreTotalBoxerBlueCorner = 0;
+        
         StringBuilder finalMessage = new StringBuilder();
         for (int i = 0; i < getJudgeScoreCard().length; i++) {
             String[] scoreBoxerRound = splitScoreCorner(getJudgeScoreCard()[i]);
+
+            scoreTotalBoxerRedCorner += Integer.parseInt(scoreBoxerRound[0]);
+            scoreTotalBoxerBlueCorner += Integer.parseInt(scoreBoxerRound[1]);
+
             int currentRound = i+1;
-            finalMessage.append(scoreBoxerRound[0] + "\t\t " + currentRound + "\t\t " + scoreBoxerRound[1] + "\n");
+            finalMessage.append(scoreBoxerRound[0] + "\t " + scoreTotalBoxerRedCorner + "\t " + currentRound + "\t " + scoreTotalBoxerBlueCorner + "\t " + scoreBoxerRound[1] + "\n");
         }
         return finalMessage.toString();
     }
