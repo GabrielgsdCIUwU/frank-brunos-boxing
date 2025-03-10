@@ -55,6 +55,9 @@ public class ScoreCard {
     public String toString() {
         return "\n\t\t" + color + "\n\t"
                 + getRCorner() + "\t"
-                + getBCorner();
+                + getBCorner() + "\n"
+                + "Round \t Score \t Round \t Score \t Round\n" 
+                + "Score \t Total \t       \t Total \t Score\n"
+                + getEachScoreRound();
     }
 }
