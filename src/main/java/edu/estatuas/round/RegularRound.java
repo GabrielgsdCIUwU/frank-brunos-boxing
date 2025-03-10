@@ -7,6 +7,7 @@ public class RegularRound implements Round {
 
     public RegularRound(String roundScore) {
         this.roundScore = roundScore;
+        boxerRoundScore();
     }
 
     String getRoundScore() {
