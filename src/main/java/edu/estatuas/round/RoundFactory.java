@@ -7,7 +7,10 @@ public class RoundFactory {
             return new RegularRound(roundScore);
         }else if (roundScore.equalsIgnoreCase("10 - 8") || roundScore.equalsIgnoreCase("8 - 10")) {
             return new KnockdownRound(roundScore);
-        }
+        } else if(roundScore.equalsIgnoreCase("1, 8 - 10") 
+                || roundScore.equalsIgnoreCase("10 - 8 ,1")) {
+                   return new PointsDeducted(roundScore);
+                }
         return null;
     }
 }
