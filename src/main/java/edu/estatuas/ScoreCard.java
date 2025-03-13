@@ -8,7 +8,6 @@ public class ScoreCard {
     private String color;
     private String redCorner = "";
     private String blueCorner = "";
-    private String[] judgeScoreCard;
     private Round[] rounds;
 
     ScoreCard (String color) {
@@ -32,16 +31,12 @@ public class ScoreCard {
     }
 
     public void loadJudgeScoreCard(String[] judgeScoreCard) {
-        this.judgeScoreCard = judgeScoreCard;
         rounds = new Round[judgeScoreCard.length];
         for (int i = 0; i < rounds.length; i++) {
             rounds[i] = RoundFactory.getRound(judgeScoreCard[i]);
         }
     }
 
-    private String[] getJudgeScoreCard() {
-        return judgeScoreCard;
-    }
 
     private Round[] getRounds() {
         return rounds;
