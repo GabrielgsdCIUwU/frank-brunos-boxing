@@ -57,9 +57,19 @@ public class ScoreCard {
             scoreTotalBoxerBlueCorner += scoreBlueBoxer;
 
             int currentRound = i+1;
-            finalMessage.append(scoreRedBoxer + "\t " + scoreTotalBoxerRedCorner + "\t " + currentRound + "\t " + scoreTotalBoxerBlueCorner + "\t " + scoreBlueBoxer + "\n");
+            finalMessage.append(find7AndConvertToComma(scoreRedBoxer, 0)  + "\t " + scoreTotalBoxerRedCorner + "\t " + currentRound + "\t " + scoreTotalBoxerBlueCorner + "\t " + find7AndConvertToComma(scoreBlueBoxer, 1) + "\n");
         }
         return finalMessage.toString();
+    }
+
+    private String find7AndConvertToComma(byte score, int boxer) {
+        if (score == 7 && boxer == 0) {
+            return "1, 8";
+        } else if (score == 7 && boxer == 1) {
+            return "8, 1";
+        } else {
+            return String.valueOf(score);
+        }
     }
 
     public int getRedBoxerFinalScore() {
