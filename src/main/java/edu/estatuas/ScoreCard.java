@@ -78,16 +78,15 @@ public class ScoreCard {
     private int getFinalScoreBoxer(int corner) {
         
         int finalScoreBoxer = 0;
-        for (int i = 0; i < getJudgeScoreCard().length; i++) {
-            String[] scoreBoxerRound = splitScoreCorner(getJudgeScoreCard()[i]);
+        for (Round round : rounds) {
+            if (corner == 0) {
+                finalScoreBoxer += Integer.parseInt(String.valueOf(round.redBoxerScore())); 
+            } else {
+                finalScoreBoxer += Integer.parseInt(String.valueOf(round.blueBoxerScore()));
+            }
 
-            finalScoreBoxer += Integer.parseInt(scoreBoxerRound[corner]);
         }
         return finalScoreBoxer;
-    }
-
-    private String[] splitScoreCorner(String scoreRound) {
-        return scoreRound.split(" - ");
     }
 
     @Override
