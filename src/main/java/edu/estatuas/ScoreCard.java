@@ -61,7 +61,7 @@ public class ScoreCard {
             scoreTotalBoxerBlueCorner += scoreBlueBoxer;
 
             int currentRound = i + 1;
-            finalMessage.append(find7AndConvertToComma(scoreRedBoxer, 0))
+            finalMessage.append(find7AndConvertToComma(scoreRedBoxer, Boolean.TRUE))
                     .append("\t")
                     .append(scoreTotalBoxerRedCorner)
                     .append("\t")
@@ -69,16 +69,16 @@ public class ScoreCard {
                     .append("\t")
                     .append(scoreTotalBoxerBlueCorner)
                     .append("\t")
-                    .append(find7AndConvertToComma(scoreBlueBoxer, 1))
+                    .append(find7AndConvertToComma(scoreBlueBoxer, Boolean.FALSE))
                     .append("\n");
         }
         return finalMessage.toString();
     }
 
-    private String find7AndConvertToComma(byte score, int boxer) {
-        if (score == 7 && boxer == 0) {
+    private String find7AndConvertToComma(byte score, Boolean boxer) {
+        if (score == 7 && boxer.booleanValue()) {
             return "1, 8";
-        } else if (score == 7 && boxer == 1) {
+        } else if (score == 7 && !boxer.booleanValue()) {
             return "8, 1";
         } else {
             return String.valueOf(score);
@@ -86,16 +86,16 @@ public class ScoreCard {
     }
 
     public int getRedBoxerFinalScore() {
-        return getFinalScoreBoxer(0);
+        return getFinalScoreBoxer(Boolean.TRUE);
     }
 
     public int getBlueBoxerFinalScore() {
-        return getFinalScoreBoxer(1);
+        return getFinalScoreBoxer(Boolean.FALSE);
     }
 
-    private int getFinalScoreBoxer(int corner) {
-        
-        return rounds.stream().map(round -> corner == 0 ? (int) round.redBoxerScore() : (int) round.blueBoxerScore())
+    private int getFinalScoreBoxer(Boolean boxer) {
+
+        return rounds.stream().map(round -> boxer.booleanValue() ? (int) round.redBoxerScore() : (int) round.blueBoxerScore())
                 .mapToInt(Integer::intValue).sum();
     }
 
